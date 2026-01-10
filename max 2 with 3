@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+// Function to find the maximum between two numbers
+int max_two(int a, int b) {
+    return (a > b) ? a : b;
+}
+
+// Function to find the maximum among three numbers using the max_two function
+int max_three(int a, int b, int c) {
+    return max_two(max_two(a, b), c);
+}
+
+int main() {
+    int num1, num2, num3;
+    
+    // Input three numbers
+    printf("Enter three numbers: ");
+    scanf("%d %d %d", &num1, &num2, &num3);
+    
+    // Find and display the maximum
+    int maximum = max_three(num1, num2, num3);
+    printf("Maximum: %d\n", maximum);
+    
+    return 0;
+}
