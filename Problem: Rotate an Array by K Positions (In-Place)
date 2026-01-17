@@ -1,0 +1,55 @@
+#include <stdio.h>
+
+// Function to compute GCD
+int gcd(int a, int b) {
+    while (b != 0) {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+
+int main() {
+    int n;
+    scanf("%d", &n);
+
+    int arr[n];  // Using VLA, or use dynamic if needed
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    int k;
+    scanf("%d", &k);
+
+    // Effective rotations for right rotation
+    k = k % n;
+    k = (n - k) % n;  // Adjust for right rotation
+
+    if (k == 0) {
+        // No rotation needed
+    } else {
+        int g = gcd(n, k);
+        for (int i = 0; i < g; i++) {
+            // Rotate the cycle starting at i
+            int temp = arr[i];
+            int j = i;
+            while (1) {
+                int d = (j + k) % n;
+                if (d == i) break;
+                arr[j] = arr[d];
+                j = d;
+            }
+            arr[j] = temp;
+        }
+    }
+
+    // Print the array
+    for (int i = 0; i < n; i++) {
+        if (i > 0) printf(" ");
+        printf("%d", arr[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
